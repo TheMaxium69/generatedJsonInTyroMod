@@ -2,7 +2,19 @@ Import-Module -Name "E:\Minecraft\TyroMod\generatedMineraixInTyroMod\function\Ad
 Import-Module -Name "E:\Minecraft\TyroMod\generatedMineraixInTyroMod\function\Add-Tool.psm1"
 Import-Module -Name "E:\Minecraft\TyroMod\generatedMineraixInTyroMod\function\Add-Other.psm1"
 Import-Module -Name "E:\Minecraft\TyroMod\generatedMineraixInTyroMod\function\Add-Armor.psm1"
+Import-Module -Name "E:\Minecraft\TyroMod\generatedMineraixInTyroMod\function\Add-Block.psm1"
 Import-Module -Name "E:\Minecraft\TyroMod\generatedMineraixInTyroMod\function\CreateJson-Item.psm1"
+Import-Module -Name "E:\Minecraft\TyroMod\generatedMineraixInTyroMod\function\CreateJson-Lang.psm1"
+
+# MAIN VARIABLE
+
+$oreItemDefault = "YES"
+$toolDefault = "NO"
+$armorDefault = "NO"
+$tierOreDefault = "IUM"
+$versionOreDefault = "1"
+
+# START SCRIPT
 
 echo "Start Script Create Ore"
 echo "--------------------------------------------------------------------------"
@@ -29,54 +41,122 @@ $pathJavaFile = $path + "src\main\java" + $package
 
 $pathResourceFile = $path + "src\main\resources\assets\"+$modid+"\models\item\"
 
+$pathLangFile = $path + "src\main\resources\assets\"+$modid+"\lang\"
+
 echo "--------------------------------------------------------------------------"
+echo "PRINCIPAL INFORMATION"
+
 #Name Ore
 $name = Read-Host "the NAME of your Ore";
 
-# Lower
-$nameL = $name.toLower()
+    # Lower
+    $nameL = $name.toLower()
 
-# Maj
-$nameM = $name.toUpper()
+    # Maj
+    $nameM = $name.toUpper()
 
-# First Maj
-$nameF = (Get-Culture).textinfo.totitlecase($nameL)
+    # First Maj
+    $nameF = (Get-Culture).textinfo.totitlecase($nameL)
 
-# -------------------------------------------------------------------
-
-#Ore to an Ingot
-$isIngot = Read-Host "It is a Ingot? YES or NO | default: NO"
-if ($isIngot -eq "") {
-    $isIngot = "NO"
+#Tier Ore
+$tierOre = Read-Host "the TIER of your Ore ? IUM OR 1 OR 2 OR 3 | default:"$tierOreDefault
+if ($tierOre -eq "") {
+    $tierOreFinal = $tierOreDefault
 }
 
-if ($isIngot -eq "YES") {
-    # OreIngot
-    $contenuIngot = Add-Other $nameL "Ingot"
-    $linkIngot = $pathJavaFile + "item\" + $nameF + "Ingot" + ".java"
-    ADD-content -path $linkIngot -value $contenuIngot
-    $contenuModItems = '
-    // '+ $nameF +'
-    public static final RegistryObject<Item> '+ $nameM +'_INGOT = ITEMS.register("'+ $nameL +'_ingot", () -> new '+ $nameF +'Ingot());'
+    if ($tierOre -eq "IUM") {
+        $tierOreFinal = "§1Tier IUM"
+    }
 
-    $contenuJsonIngot = CreateJson-Item $nameL"_ingot" "generated"
-    $linkJsonIngot = $pathResourceFile + $nameL + "_ingot.json"
-    ADD-content -path $linkJsonIngot -value $contenuJsonIngot
+    if ($tierOre -eq "1") {
+        $tierOreFinal = "§dTier 1"
+    }
+
+    if ($tierOre -eq "2") {
+        $tierOreFinal = "§9Tier 2"
+    }
+
+    if ($tierOre -eq "3") {
+        $tierOreFinal = "§4Tier 3"
+    }
+
+
+#Version Ore
+$versionOre = Read-Host "the VERSION of your Ore ? 1 OR 3 OR V1 OR V3 OR 13 | default:"$versionOreDefault
+if ($versionOre -eq "") {
+    $versionOreFinal = $versionOreDefault
 }
 
-if ($isIngot -eq "NO") {
-    # OreDefault
-    $contenuDef = Add-Contenu $nameF $nameL
-    $linkDef = $pathJavaFile + "item\" + $nameF + ".java"
-    ADD-content -path $linkDef -value $contenuDef
-    $contenuModItems = '
-    // '+ $nameF +'
-    public static final RegistryObject<Item> '+ $nameM +' = ITEMS.register("'+ $nameL +'", () -> new '+ $nameF +'());'
+    if ($versionOre -eq "1") {
+        $versionOreFinal = "§cTyroMod V1"
+    }
 
-    $contenuJsonDef = CreateJson-Item $nameL "generated"
-    $linkJsonDef = $pathResourceFile + $nameL + ".json"
-    ADD-content -path $linkJsonDef -value $contenuJsonDef
+    if ($versionOre -eq "3") {
+        $versionOreFinal = "§4TyroMod V3"
+    }
 
+    if ($versionOre -eq "V1") {
+        $versionOreFinal = "§8Vanilla §f- §cTyroMod V1"
+    }
+
+    if ($versionOre -eq "V3") {
+        $versionOreFinal = "§8Vanilla §f- §4TyroMod V3"
+    }
+
+    if ($versionOre -eq "13") {
+        $versionOreFinal = "§cTyroMod V1 §f- §4TyroMod V3"
+    }
+
+echo "--------------------------------------------------------------------------"
+echo "ITEM ORE"
+
+# Ore to an Item
+$isItem = Read-Host "It is a ITEM? YES or NO | default:"$oreItemDefault
+if ($isItem -eq "") {
+    $isItem = $oreItemDefault
+}
+
+if ($isItem -eq "YES")
+{
+    #Ore to an Ingot
+    $isIngot = Read-Host "It is a Ingot? YES or NO | default: NO"
+    if ($isIngot -eq "")
+    {
+        $isIngot = "NO"
+    }
+
+    if ($isIngot -eq "YES")
+    {
+        # OreIngot
+        $contenuIngot = Add-Other $nameL "Ingot"
+        $linkIngot = $pathJavaFile + "item\" + $nameF + "Ingot" + ".java"
+        ADD-content -path $linkIngot -value $contenuIngot
+        $contenuModItems = '
+    // ' + $nameF + '
+    public static final RegistryObject<Item> ' + $nameM + '_INGOT = ITEMS.register("' + $nameL + '_ingot", () -> new ' + $nameF + 'Ingot());'
+        CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_ingot" "Ingot" "L'Ingot de"
+
+        $contenuJsonIngot = CreateJson-Item $nameL"_ingot" "generated"
+        $linkJsonIngot = $pathResourceFile + $nameL + "_ingot.json"
+        ADD-content -path $linkJsonIngot -value $contenuJsonIngot
+    }
+
+    if ($isIngot -eq "NO")
+    {
+        # OreDefault
+        $contenuDef = Add-Contenu $nameF $nameL
+        $linkDef = $pathJavaFile + "item\" + $nameF + ".java"
+        ADD-content -path $linkDef -value $contenuDef
+        $contenuModItems = '
+    // ' + $nameF + '
+    public static final RegistryObject<Item> ' + $nameM + ' = ITEMS.register("' + $nameL + '", () -> new ' + $nameF + '());'
+        CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "" "" ""
+
+        $contenuJsonDef = CreateJson-Item $nameL "generated"
+        $linkJsonDef = $pathResourceFile + $nameL + ".json"
+        ADD-content -path $linkJsonDef -value $contenuJsonDef
+
+    }
 }
 
 #Ore to a Nugget
@@ -92,6 +172,7 @@ if ($isNugget -eq "YES") {
     ADD-content -path $linkNugget -value $contenuNugget
     $contenuModItems = $contenuModItems + '
     public static final RegistryObject<Item> '+ $nameM +'_NUGGET = ITEMS.register("'+ $nameL +'_nugget", () -> new '+ $nameF +'Nugget());'
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_nugget" "Nugget" "Pépite de"
 
     $contenuJsonNugget = CreateJson-Item $nameL"_nugget" "generated"
     $linkJsonNugget = $pathResourceFile + $nameL + "_nugget.json"
@@ -111,6 +192,7 @@ if ($isPowder -eq "YES") {
     ADD-content -path $linkPowder -value $contenuPowder
     $contenuModItems = $contenuModItems + '
     public static final RegistryObject<Item> '+ $nameM +'_POWDER = ITEMS.register("'+ $nameL +'_powder", () -> new '+ $nameF +'Powder());'
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_powder" "Powder" "Poudre de"
 
     $contenuJsonPowder = CreateJson-Item $nameL"_powder" "generated"
     $linkJsonPowder = $pathResourceFile + $nameL + "_powder.json"
@@ -130,6 +212,7 @@ if ($isGem -eq "YES") {
     ADD-content -path $linkGem -value $contenuGem
     $contenuModItems = $contenuModItems + '
     public static final RegistryObject<Item> '+ $nameM +'_GEM = ITEMS.register("'+ $nameL +'_gem", () -> new '+ $nameF +'Gem());'
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_gem" "Gem" "Gemme de"
 
     $contenuJsonGem = CreateJson-Item $nameL"_gem" "generated"
     $linkJsonGem = $pathResourceFile + $nameL + "_gem.json"
@@ -149,6 +232,7 @@ if ($isStick -eq "YES") {
     ADD-content -path $linkStick -value $contenuStick
     $contenuModItems = $contenuModItems + '
     public static final RegistryObject<Item> '+ $nameM +'_STICK = ITEMS.register("'+ $nameL +'_stick", () -> new '+ $nameF +'Stick());'
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_stick" "Stick" "Bâton en"
 
     $contenuJsonStick = CreateJson-Item $nameL"_stick" "generated"
     $linkJsonStick = $pathResourceFile + $nameL + "_stick.json"
@@ -156,7 +240,6 @@ if ($isStick -eq "YES") {
 }
 
 #Ore to a Tool
-$toolDefault = "NO"
 $isTool = Read-Host "The ore to a Tool Classic? YES or NO | default:"$toolDefault
 if ($isTool -eq "") {
     $isTool = $toolDefault
@@ -168,6 +251,7 @@ if ($isTool -eq "YES")
     $contenuSword = Add-Tool $nameL "Sword"
     $linkSword = $pathJavaFile + "item\" + $nameF + "Sword" + ".java"
     ADD-content -path $linkSword -value $contenuSword
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_sword" "Sword" "Épée en"
 
     $contenuJsonSword = CreateJson-Item $nameL"_sword" "handheld"
     $linkJsonSword = $pathResourceFile + $nameL + "_sword.json"
@@ -177,6 +261,7 @@ if ($isTool -eq "YES")
     $contenuPickaxe = Add-Tool $nameL "Pickaxe"
     $linkPickaxe = $pathJavaFile + "item\" + $nameF + "Pickaxe" + ".java"
     ADD-content -path $linkPickaxe -value $contenuPickaxe
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_pickaxe" "Pickaxe" "Pioche en"
 
     $contenuJsonPickaxe = CreateJson-Item $nameL"_pickaxe" "handheld"
     $linkJsonPickaxe = $pathResourceFile + $nameL + "_pickaxe.json"
@@ -186,6 +271,7 @@ if ($isTool -eq "YES")
     $contenuAxe = Add-Tool $nameL "Axe"
     $linkAxe = $pathJavaFile + "item\" + $nameF + "Axe" + ".java"
     ADD-content -path $linkAxe -value $contenuAxe
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_axe" "Axe" "Hache en"
 
     $contenuJsonAxe = CreateJson-Item $nameL"_axe" "handheld"
     $linkJsonAxe = $pathResourceFile + $nameL + "_axe.json"
@@ -195,6 +281,7 @@ if ($isTool -eq "YES")
     $contenuShovel = Add-Tool $nameL "Shovel"
     $linkShovel = $pathJavaFile + "item\" + $nameF + "Shovel" + ".java"
     ADD-content -path $linkShovel -value $contenuShovel
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_shovel" "Shovel" "Pelle en"
 
     $contenuJsonShovel = CreateJson-Item $nameL"_shovel" "handheld"
     $linkJsonShovel = $pathResourceFile + $nameL + "_shovel.json"
@@ -204,6 +291,7 @@ if ($isTool -eq "YES")
     $contenuHoe = Add-Tool $nameL "Hoe"
     $linkHoe = $pathJavaFile + "item\" + $nameF + "Hoe" + ".java"
     ADD-content -path $linkHoe -value $contenuHoe
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_hoe" "Hoe" "Houe en"
 
     $contenuJsonHoe = CreateJson-Item $nameL"_hoe" "handheld"
     $linkJsonHoe = $pathResourceFile + $nameL + "_hoe.json"
@@ -229,6 +317,7 @@ if ($isTool -eq "YES")
         ADD-content -path $linkHammer -value $contenuHammer
         $contenuModItems = $contenuModItems + '
     public static final RegistryObject<Item> '+ $nameM +'_HAMMER = ITEMS.register("'+ $nameL +'_hammer", () -> new '+ $nameF +'Hammer());'
+        CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_hammer" "Hammer" "Marteau en"
 
         $contenuJsonHammer = CreateJson-Item $nameL"_hammer" "handheld"
         $linkJsonHammer = $pathResourceFile + $nameL + "_hammer.json"
@@ -248,6 +337,7 @@ if ($isTool -eq "YES")
         ADD-content -path $linkSwordFire -value $contenuSwordFire
         $contenuModItems = $contenuModItems + '
     public static final RegistryObject<Item> '+ $nameM +'_SWORD_FIRE = ITEMS.register("'+ $nameL +'_sword_fire", () -> new '+ $nameF +'SwordFire());'
+        CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_sword_fire" "Sword Fire" "Épée Enflammer en"
 
         $contenuJsonSwordFire = CreateJson-Item $nameL"_sword_fire" "handheld"
         $linkJsonSwordFire = $pathResourceFile + $nameL + "_sword_fire.json"
@@ -256,7 +346,6 @@ if ($isTool -eq "YES")
 }
 
 #Ore to a Armor
-$armorDefault = "NO"
 $isArmor = Read-Host "The ore to a Armor Classic? YES or NO | default:"$armorDefault
 if ($isArmor -eq "") {
     $isArmor = $armorDefault
@@ -268,6 +357,7 @@ if ($isArmor -eq "YES")
     $contenuHelmet = Add-Armor $nameL "Helmet"
     $linkHelmet = $pathJavaFile + "item\" + $nameF + "Helmet" + ".java"
     ADD-content -path $linkHelmet -value $contenuHelmet
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_helmet" "Helmet" "Casque en"
 
     $contenuJsonHelmet = CreateJson-Item $nameL"_helmet" "handheld"
     $linkJsonHelmet = $pathResourceFile + $nameL + "_helmet.json"
@@ -277,6 +367,7 @@ if ($isArmor -eq "YES")
     $contenuChestplate = Add-Armor $nameL "Chestplate"
     $linkChestplate = $pathJavaFile + "item\" + $nameF + "Chestplate" + ".java"
     ADD-content -path $linkChestplate -value $contenuChestplate
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_chestplate" "Chestplate" "Plastron en"
 
     $contenuJsonChestplate = CreateJson-Item $nameL"_chestplate" "handheld"
     $linkJsonChestplate = $pathResourceFile + $nameL + "_chestplate.json"
@@ -286,6 +377,7 @@ if ($isArmor -eq "YES")
     $contenuLeggings = Add-Armor $nameL "Leggings"
     $linkLeggings = $pathJavaFile + "item\" + $nameF + "Leggings" + ".java"
     ADD-content -path $linkLeggings -value $contenuLeggings
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_leggings" "Leggings" "Jambières en"
 
     $contenuJsonLeggings = CreateJson-Item $nameL"_leggings" "handheld"
     $linkJsonLeggings = $pathResourceFile + $nameL + "_leggings.json"
@@ -295,6 +387,7 @@ if ($isArmor -eq "YES")
     $contenuBoots = Add-Armor $nameL "Boots"
     $linkBoots = $pathJavaFile + "item\" + $nameF + "Boots" + ".java"
     ADD-content -path $linkBoots -value $contenuBoots
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_boots" "Boots" "Bottes en"
 
     $contenuJsonBoots = CreateJson-Item $nameL"_boots" "handheld"
     $linkJsonBoots = $pathResourceFile + $nameL + "_boots.json"
@@ -311,7 +404,35 @@ if ($isArmor -eq "YES")
 $linkModItems = $pathJavaFile + "init\ModItems.java"
 ADD-content -path $linkModItems -value $contenuModItems
 
-# -------------------------------------------------------------------
+echo "--------------------------------------------------------------------------"
+echo "BLOCK ORE"
+
+#Ore to a Block
+$isBlock = Read-Host "The ore to a Block? YES or NO | default: NO"
+if ($isBlock -eq "") {
+    $isBlock = "NO"
+}
+
+if ($isBlock -eq "YES")
+{
+
+
+}
+
+#Ore to a Ore
+$isOreBlock = Read-Host "The ore to a Ore Block? YES or NO | default: NO"
+if ($isOreBlock -eq "") {
+    $isOreBlock = "NO"
+}
+
+if ($isOreBlock -eq "YES")
+{
+
+
+}
+
+echo "--------------------------------------------------------------------------"
+echo "UTILS ORE"
 
 if ($isTool -eq "YES")
 {
