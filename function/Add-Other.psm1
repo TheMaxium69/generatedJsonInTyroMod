@@ -39,7 +39,7 @@ public class '+ $oreF + $extF +' extends Item {
 
     public static String itemString = "'+ $oreL + "_" + $extL +'";
     public static ItemGroup modItemGroup = ModItemGroup.TAB_TYROMOD;
-    public static Properties properties = new Item.Properties().tab(modItemGroup);;
+    public static Properties properties = new Item.Properties().tab(modItemGroup);
 
     public '+ $oreF + $extF +'() {
         super(properties);

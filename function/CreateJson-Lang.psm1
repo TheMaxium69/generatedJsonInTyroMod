@@ -17,6 +17,7 @@ function CreateJson-Lang {
 
 # Info
 
+    $TypeOre = $args[7]
     $TierOre = $args[2]
     $VersionOre = $args[3]
 
@@ -28,7 +29,7 @@ function CreateJson-Lang {
 
 
 $contenuJsonEN = '
-"item.tyromod.'+ $oreL + $addDefault +'": "'+ $oreF +' '+ $addEN +'",
+"'+ $TypeOre +'.tyromod.'+ $oreL + $addDefault +'": "'+ $oreF +' '+ $addEN +'",
 "tooltip.tyromod.'+ $oreL + $addDefault +'": "§7Fusion: '+ $TierOre +'",
 "tooltip.tyromod.'+ $oreL + $addDefault +'_shift": "§fFusion: '+ $TierOre +' §f, Version: '+ $VersionOre +'",'
 
@@ -37,14 +38,14 @@ $contenuJsonEN = '
 if ($addFR -eq ""){
 
 $contenuJsonFR = '
-"item.tyromod.'+ $oreL + $addDefault +'": "'+ $oreF +'",
+"'+ $TypeOre +'.tyromod.'+ $oreL + $addDefault +'": "'+ $oreF +'",
 "tooltip.tyromod.'+ $oreL + $addDefault +'": "§7Fusion: '+ $TierOre +'",
 "tooltip.tyromod.'+ $oreL + $addDefault +'_shift": "§fFusion: '+ $TierOre +' §f, Version: '+ $VersionOre +'",'
 
 } else {
 
 $contenuJsonFR = '
-"item.tyromod.'+ $oreL + $addDefault +'": "'+ $addFR +' '+ $oreF +'",
+"'+ $TypeOre +'.tyromod.'+ $oreL + $addDefault +'": "'+ $addFR +' '+ $oreF +'",
 "tooltip.tyromod.'+ $oreL + $addDefault +'": "§7Fusion: '+ $TierOre +'",
 "tooltip.tyromod.'+ $oreL + $addDefault +'_shift": "§fFusion: '+ $TierOre +' §f, Version: '+ $VersionOre +'",'
 
