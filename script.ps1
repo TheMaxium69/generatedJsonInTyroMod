@@ -468,9 +468,11 @@ if ($contenuModBlocks -ne $contenuModBlocksDefault) {
     ADD-content -path $linkModBlocks -value $contenuModBlocks
 }
 
-echo "--------------------------------------------------------------------------"
-echo "UTILS ORE"
-
+if (($isTool -eq "YES") -or ($isArmor -eq "YES") -or (($isTool -eq "YES") -and ($isArmor -eq "YES")))
+{
+    echo "--------------------------------------------------------------------------"
+    echo "UTILS ORE"
+}
 if ($isTool -eq "YES")
 {
 
