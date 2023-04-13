@@ -46,6 +46,7 @@ $pathBlockFile = $path + "src\main\resources\"
 
 $pathLangFile = $path + "src\main\resources\assets\"+$modid+"\lang\"
 
+$pathCraftFile = $path + "src\main\resources\data\"+$modid+"\recipes\"
 
 echo "--------------------------------------------------------------------------"
 echo "PRINCIPAL INFORMATION"
@@ -63,7 +64,13 @@ $name = Read-Host "the NAME of your Ore";
     $nameF = (Get-Culture).textinfo.totitlecase($nameL)
 
 #Tier Ore
-$tierOre = Read-Host "the TIER of your Ore ? IUM OR 1 OR 2 OR 3 | default:"$tierOreDefault
+$textTemp1 = "the TIER of your Ore ? | default: " + $tierOreDefault
+echo $textTemp1
+echo " 1 = Tier 1"
+echo " 2 = Tier 2"
+echo " 3 = Tier 3"
+echo " IUM = Tier IUM"
+$tierOre = Read-Host "Reponse "
 if ($tierOre -eq "") {
     $tierOre = $tierOreDefault
 }
@@ -86,7 +93,14 @@ if ($tierOre -eq "") {
 
 
 #Version Ore
-$versionOre = Read-Host "the VERSION of your Ore ? 1 OR 3 OR V1 OR V3 OR 13 | default:"$versionOreDefault
+$textTemp2 = "the VERSION of your Ore ? | default: " +$versionOreDefault
+echo $textTemp2
+echo " 1 = TyroMod V1"
+echo " 3 = TyroMod V3"
+echo " V1 = Vanilla - TyroMod V1"
+echo " V3 = Vanilla - TyroMod V3"
+echo " 13 = TyroMod V1 - TyroMod V3"
+$versionOre = Read-Host "Reponse "
 if ($versionOre -eq "") {
     $versionOre = $versionOreDefault
 }
@@ -146,6 +160,8 @@ if ($isItem -eq "YES")
         $contenuJsonIngot = CreateJson-Item $nameL"_ingot" "generated"
         $linkJsonIngot = $pathResourceFile + $nameL + "_ingot.json"
         ADD-content -path $linkJsonIngot -value $contenuJsonIngot
+
+        $defaultOreCraft = $nameL + "_ingot"
     }
 
     if ($isIngot -eq "NO")
@@ -161,6 +177,8 @@ if ($isItem -eq "YES")
         $contenuJsonDef = CreateJson-Item $nameL "generated"
         $linkJsonDef = $pathResourceFile + $nameL + ".json"
         ADD-content -path $linkJsonDef -value $contenuJsonDef
+
+        $defaultOreCraft = $nameL
 
     }
 }
@@ -526,12 +544,52 @@ echo "--------------------------------------------------------------------------
 echo "CRAFT ORE"
 
 
+# TOOL
+if ($isTool -eq "NO")
+{
+    $isCraftToolDef = Read-Host "Default Craft Tool? YES or NO | default: NO"
+    if ($isCraftToolDef -eq "") {
+        $isCraftToolDef = "NO"
+    }
+
+
+    if ($isCraftToolDef -eq "YES")
+    {
+        CreateJson-Craft $pathCraftFile "TOOL_DEFAULT" $defaultOreCraft $nameL
+    }
+    if ($isCraftToolDef -eq "NO")
+    {
+
+        echo "What Class of Tool? | default: 1"
+        echo " 1 = Mercure"
+        echo " 2 = RedStone"
+        echo " etc..."
+        $isCraftToolClass = Read-Host "Reponse "
+        if ($isCraftToolClass -eq "") {
+            $isCraftToolClass = "1"
+        }
+
+        if ($isCraftToolClass -eq "1")
+        {
+            CreateJson-Craft
+        }
+
+        if ($isCraftToolClass -eq "2")
+        {
+            CreateJson-Craft
+        }
+
+        #etc...
 
 
 
+    }
+
+}
+
+#ARMOR
+if ($isArmor -eq "YES"){
 
 
 
-
-
-
+}
