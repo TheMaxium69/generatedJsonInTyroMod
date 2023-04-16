@@ -168,16 +168,16 @@ if ($isItem -eq "YES")
     if ($isIngot -eq "NO")
     {
         # OreDefault
-#        $contenuDef = Add-Contenu $nameF $nameL
-#        $linkDef = $pathJavaFile + "item\" + $nameF + ".java"
-#        ADD-content -path $linkDef -value $contenuDef
-#        $contenuModItems = $contenuModItems + '
-#    public static final RegistryObject<Item> ' + $nameM + ' = ITEMS.register("' + $nameL + '", () -> new ' + $nameF + '());'
-#        CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "" "" "" "item"
-#
-#        $contenuJsonDef = CreateJson-Item $nameL "generated"
-#        $linkJsonDef = $pathResourceFile + $nameL + ".json"
-#        ADD-content -path $linkJsonDef -value $contenuJsonDef
+        $contenuDef = Add-Contenu $nameF $nameL
+        $linkDef = $pathJavaFile + "item\" + $nameF + ".java"
+        ADD-content -path $linkDef -value $contenuDef
+        $contenuModItems = $contenuModItems + '
+    public static final RegistryObject<Item> ' + $nameM + ' = ITEMS.register("' + $nameL + '", () -> new ' + $nameF + '());'
+        CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "" "" "" "item"
+
+        $contenuJsonDef = CreateJson-Item $nameL "generated"
+        $linkJsonDef = $pathResourceFile + $nameL + ".json"
+        ADD-content -path $linkJsonDef -value $contenuJsonDef
 
         $defaultOreCraft = $nameL
 
@@ -202,6 +202,8 @@ if ($isNugget -eq "YES") {
     $contenuJsonNugget = CreateJson-Item $nameL"_nugget" "generated"
     $linkJsonNugget = $pathResourceFile + $nameL + "_nugget.json"
     ADD-content -path $linkJsonNugget -value $contenuJsonNugget
+
+    CreateJson-Craft $pathCraftFile "NUGGET_DEFAULT" $defaultOreCraft $nameL
 }
 
 #Ore to a Powder
@@ -272,62 +274,62 @@ if ($isTool -eq "") {
 
 if ($isTool -eq "YES")
 {
-#    # OreSword
-#    $contenuSword = Add-Tool $nameL "Sword"
-#    $linkSword = $pathJavaFile + "item\" + $nameF + "Sword" + ".java"
-#    ADD-content -path $linkSword -value $contenuSword
-#    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_sword" "Sword" "Épée en" "item"
-#
-#    $contenuJsonSword = CreateJson-Item $nameL"_sword" "handheld"
-#    $linkJsonSword = $pathResourceFile + $nameL + "_sword.json"
-#    ADD-content -path $linkJsonSword -value $contenuJsonSword
-#
-#    # OrePickaxe
-#    $contenuPickaxe = Add-Tool $nameL "Pickaxe"
-#    $linkPickaxe = $pathJavaFile + "item\" + $nameF + "Pickaxe" + ".java"
-#    ADD-content -path $linkPickaxe -value $contenuPickaxe
-#    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_pickaxe" "Pickaxe" "Pioche en" "item"
-#
-#    $contenuJsonPickaxe = CreateJson-Item $nameL"_pickaxe" "handheld"
-#    $linkJsonPickaxe = $pathResourceFile + $nameL + "_pickaxe.json"
-#    ADD-content -path $linkJsonPickaxe -value $contenuJsonPickaxe
-#
-#    # OreAxe
-#    $contenuAxe = Add-Tool $nameL "Axe"
-#    $linkAxe = $pathJavaFile + "item\" + $nameF + "Axe" + ".java"
-#    ADD-content -path $linkAxe -value $contenuAxe
-#    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_axe" "Axe" "Hache en" "item"
-#
-#    $contenuJsonAxe = CreateJson-Item $nameL"_axe" "handheld"
-#    $linkJsonAxe = $pathResourceFile + $nameL + "_axe.json"
-#    ADD-content -path $linkJsonAxe -value $contenuJsonAxe
-#
-#    # OreShovel
-#    $contenuShovel = Add-Tool $nameL "Shovel"
-#    $linkShovel = $pathJavaFile + "item\" + $nameF + "Shovel" + ".java"
-#    ADD-content -path $linkShovel -value $contenuShovel
-#    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_shovel" "Shovel" "Pelle en" "item"
-#
-#    $contenuJsonShovel = CreateJson-Item $nameL"_shovel" "handheld"
-#    $linkJsonShovel = $pathResourceFile + $nameL + "_shovel.json"
-#    ADD-content -path $linkJsonShovel -value $contenuJsonShovel
-#
-#    # OreHoe
-#    $contenuHoe = Add-Tool $nameL "Hoe"
-#    $linkHoe = $pathJavaFile + "item\" + $nameF + "Hoe" + ".java"
-#    ADD-content -path $linkHoe -value $contenuHoe
-#    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_hoe" "Hoe" "Houe en" "item"
-#
-#    $contenuJsonHoe = CreateJson-Item $nameL"_hoe" "handheld"
-#    $linkJsonHoe = $pathResourceFile + $nameL + "_hoe.json"
-#    ADD-content -path $linkJsonHoe -value $contenuJsonHoe
-#
-#    $contenuModItems = $contenuModItems + '
-#    public static final RegistryObject<Item> '+ $nameM +'_SWORD = ITEMS.register("'+ $nameL +'_sword", () -> new '+ $nameF +'Sword());
-#    public static final RegistryObject<Item> '+ $nameM +'_PICKAXE = ITEMS.register("'+ $nameL +'_pickaxe", () -> new '+ $nameF +'Pickaxe());
-#    public static final RegistryObject<Item> '+ $nameM +'_AXE = ITEMS.register("'+ $nameL +'_axe", () -> new '+ $nameF +'Axe());
-#    public static final RegistryObject<Item> '+ $nameM +'_SHOVEL = ITEMS.register("'+ $nameL +'_shovel", () -> new '+ $nameF +'Shovel());
-#    public static final RegistryObject<Item> '+ $nameM +'_HOE = ITEMS.register("'+ $nameL +'_hoe", () -> new '+ $nameF +'Hoe());'
+    # OreSword
+    $contenuSword = Add-Tool $nameL "Sword"
+    $linkSword = $pathJavaFile + "item\" + $nameF + "Sword" + ".java"
+    ADD-content -path $linkSword -value $contenuSword
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_sword" "Sword" "Épée en" "item"
+
+    $contenuJsonSword = CreateJson-Item $nameL"_sword" "handheld"
+    $linkJsonSword = $pathResourceFile + $nameL + "_sword.json"
+    ADD-content -path $linkJsonSword -value $contenuJsonSword
+
+    # OrePickaxe
+    $contenuPickaxe = Add-Tool $nameL "Pickaxe"
+    $linkPickaxe = $pathJavaFile + "item\" + $nameF + "Pickaxe" + ".java"
+    ADD-content -path $linkPickaxe -value $contenuPickaxe
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_pickaxe" "Pickaxe" "Pioche en" "item"
+
+    $contenuJsonPickaxe = CreateJson-Item $nameL"_pickaxe" "handheld"
+    $linkJsonPickaxe = $pathResourceFile + $nameL + "_pickaxe.json"
+    ADD-content -path $linkJsonPickaxe -value $contenuJsonPickaxe
+
+    # OreAxe
+    $contenuAxe = Add-Tool $nameL "Axe"
+    $linkAxe = $pathJavaFile + "item\" + $nameF + "Axe" + ".java"
+    ADD-content -path $linkAxe -value $contenuAxe
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_axe" "Axe" "Hache en" "item"
+
+    $contenuJsonAxe = CreateJson-Item $nameL"_axe" "handheld"
+    $linkJsonAxe = $pathResourceFile + $nameL + "_axe.json"
+    ADD-content -path $linkJsonAxe -value $contenuJsonAxe
+
+    # OreShovel
+    $contenuShovel = Add-Tool $nameL "Shovel"
+    $linkShovel = $pathJavaFile + "item\" + $nameF + "Shovel" + ".java"
+    ADD-content -path $linkShovel -value $contenuShovel
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_shovel" "Shovel" "Pelle en" "item"
+
+    $contenuJsonShovel = CreateJson-Item $nameL"_shovel" "handheld"
+    $linkJsonShovel = $pathResourceFile + $nameL + "_shovel.json"
+    ADD-content -path $linkJsonShovel -value $contenuJsonShovel
+
+    # OreHoe
+    $contenuHoe = Add-Tool $nameL "Hoe"
+    $linkHoe = $pathJavaFile + "item\" + $nameF + "Hoe" + ".java"
+    ADD-content -path $linkHoe -value $contenuHoe
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_hoe" "Hoe" "Houe en" "item"
+
+    $contenuJsonHoe = CreateJson-Item $nameL"_hoe" "handheld"
+    $linkJsonHoe = $pathResourceFile + $nameL + "_hoe.json"
+    ADD-content -path $linkJsonHoe -value $contenuJsonHoe
+
+    $contenuModItems = $contenuModItems + '
+    public static final RegistryObject<Item> '+ $nameM +'_SWORD = ITEMS.register("'+ $nameL +'_sword", () -> new '+ $nameF +'Sword());
+    public static final RegistryObject<Item> '+ $nameM +'_PICKAXE = ITEMS.register("'+ $nameL +'_pickaxe", () -> new '+ $nameF +'Pickaxe());
+    public static final RegistryObject<Item> '+ $nameM +'_AXE = ITEMS.register("'+ $nameL +'_axe", () -> new '+ $nameF +'Axe());
+    public static final RegistryObject<Item> '+ $nameM +'_SHOVEL = ITEMS.register("'+ $nameL +'_shovel", () -> new '+ $nameF +'Shovel());
+    public static final RegistryObject<Item> '+ $nameM +'_HOE = ITEMS.register("'+ $nameL +'_hoe", () -> new '+ $nameF +'Hoe());'
 
     #Ore to a Hammer
     $isHammer = Read-Host "The ore to a Hammer? YES or NO | default : NO"
@@ -378,52 +380,52 @@ if ($isArmor -eq "") {
 
 if ($isArmor -eq "YES")
 {
-#    # OreHelmet
-#    $contenuHelmet = Add-Armor $nameL "Helmet"
-#    $linkHelmet = $pathJavaFile + "item\" + $nameF + "Helmet" + ".java"
-#    ADD-content -path $linkHelmet -value $contenuHelmet
-#    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_helmet" "Helmet" "Casque en" "item"
-#
-#    $contenuJsonHelmet = CreateJson-Item $nameL"_helmet" "handheld"
-#    $linkJsonHelmet = $pathResourceFile + $nameL + "_helmet.json"
-#    ADD-content -path $linkJsonHelmet -value $contenuJsonHelmet
-#
-#    # OreChestplate
-#    $contenuChestplate = Add-Armor $nameL "Chestplate"
-#    $linkChestplate = $pathJavaFile + "item\" + $nameF + "Chestplate" + ".java"
-#    ADD-content -path $linkChestplate -value $contenuChestplate
-#    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_chestplate" "Chestplate" "Plastron en" "item"
-#
-#    $contenuJsonChestplate = CreateJson-Item $nameL"_chestplate" "handheld"
-#    $linkJsonChestplate = $pathResourceFile + $nameL + "_chestplate.json"
-#    ADD-content -path $linkJsonChestplate -value $contenuJsonChestplate
-#
-#    # OreLeggings
-#    $contenuLeggings = Add-Armor $nameL "Leggings"
-#    $linkLeggings = $pathJavaFile + "item\" + $nameF + "Leggings" + ".java"
-#    ADD-content -path $linkLeggings -value $contenuLeggings
-#    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_leggings" "Leggings" "Jambières en" "item"
-#
-#    $contenuJsonLeggings = CreateJson-Item $nameL"_leggings" "handheld"
-#    $linkJsonLeggings = $pathResourceFile + $nameL + "_leggings.json"
-#    ADD-content -path $linkJsonLeggings -value $contenuJsonLeggings
-#
-#    # OreBoots
-#    $contenuBoots = Add-Armor $nameL "Boots"
-#    $linkBoots = $pathJavaFile + "item\" + $nameF + "Boots" + ".java"
-#    ADD-content -path $linkBoots -value $contenuBoots
-#    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_boots" "Boots" "Bottes en" "item"
-#
-#    $contenuJsonBoots = CreateJson-Item $nameL"_boots" "handheld"
-#    $linkJsonBoots = $pathResourceFile + $nameL + "_boots.json"
-#    ADD-content -path $linkJsonBoots -value $contenuJsonBoots
-#
-#
-#    $contenuModItems = $contenuModItems + '
-#    public static final RegistryObject<Item> '+ $nameM +'_HELMET = ITEMS.register("'+ $nameL +'_helmet", () -> new '+ $nameF +'Helmet());
-#    public static final RegistryObject<Item> '+ $nameM +'_CHESTPLATE = ITEMS.register("'+ $nameL +'_chestplate", () -> new '+ $nameF +'Chestplate());
-#    public static final RegistryObject<Item> '+ $nameM +'_LEGGINGS = ITEMS.register("'+ $nameL +'_leggings", () -> new '+ $nameF +'Leggings());
-#    public static final RegistryObject<Item> '+ $nameM +'_BOOTS = ITEMS.register("'+ $nameL +'_boots", () -> new '+ $nameF +'Boots());'
+    # OreHelmet
+    $contenuHelmet = Add-Armor $nameL "Helmet"
+    $linkHelmet = $pathJavaFile + "item\" + $nameF + "Helmet" + ".java"
+    ADD-content -path $linkHelmet -value $contenuHelmet
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_helmet" "Helmet" "Casque en" "item"
+
+    $contenuJsonHelmet = CreateJson-Item $nameL"_helmet" "handheld"
+    $linkJsonHelmet = $pathResourceFile + $nameL + "_helmet.json"
+    ADD-content -path $linkJsonHelmet -value $contenuJsonHelmet
+
+    # OreChestplate
+    $contenuChestplate = Add-Armor $nameL "Chestplate"
+    $linkChestplate = $pathJavaFile + "item\" + $nameF + "Chestplate" + ".java"
+    ADD-content -path $linkChestplate -value $contenuChestplate
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_chestplate" "Chestplate" "Plastron en" "item"
+
+    $contenuJsonChestplate = CreateJson-Item $nameL"_chestplate" "handheld"
+    $linkJsonChestplate = $pathResourceFile + $nameL + "_chestplate.json"
+    ADD-content -path $linkJsonChestplate -value $contenuJsonChestplate
+
+    # OreLeggings
+    $contenuLeggings = Add-Armor $nameL "Leggings"
+    $linkLeggings = $pathJavaFile + "item\" + $nameF + "Leggings" + ".java"
+    ADD-content -path $linkLeggings -value $contenuLeggings
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_leggings" "Leggings" "Jambières en" "item"
+
+    $contenuJsonLeggings = CreateJson-Item $nameL"_leggings" "handheld"
+    $linkJsonLeggings = $pathResourceFile + $nameL + "_leggings.json"
+    ADD-content -path $linkJsonLeggings -value $contenuJsonLeggings
+
+    # OreBoots
+    $contenuBoots = Add-Armor $nameL "Boots"
+    $linkBoots = $pathJavaFile + "item\" + $nameF + "Boots" + ".java"
+    ADD-content -path $linkBoots -value $contenuBoots
+    CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_boots" "Boots" "Bottes en" "item"
+
+    $contenuJsonBoots = CreateJson-Item $nameL"_boots" "handheld"
+    $linkJsonBoots = $pathResourceFile + $nameL + "_boots.json"
+    ADD-content -path $linkJsonBoots -value $contenuJsonBoots
+
+
+    $contenuModItems = $contenuModItems + '
+    public static final RegistryObject<Item> '+ $nameM +'_HELMET = ITEMS.register("'+ $nameL +'_helmet", () -> new '+ $nameF +'Helmet());
+    public static final RegistryObject<Item> '+ $nameM +'_CHESTPLATE = ITEMS.register("'+ $nameL +'_chestplate", () -> new '+ $nameF +'Chestplate());
+    public static final RegistryObject<Item> '+ $nameM +'_LEGGINGS = ITEMS.register("'+ $nameL +'_leggings", () -> new '+ $nameF +'Leggings());
+    public static final RegistryObject<Item> '+ $nameM +'_BOOTS = ITEMS.register("'+ $nameL +'_boots", () -> new '+ $nameF +'Boots());'
 }
 
 # File ModItems
@@ -457,6 +459,7 @@ if ($isBlock -eq "YES")
     CreateJson-Lang $nameL $pathLangFile $tierOreFinal $versionOreFinal "_block" "Block" "Bloc de" "block"
 
     CreateJson-Block $pathBlockFile $modid $nameL"_block"
+    CreateJson-Craft $pathCraftFile "BLOCK_DEFAULT" $defaultOreCraft $nameL
 
 }
 
