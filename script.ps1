@@ -267,7 +267,7 @@ if ($isStick -eq "YES") {
 }
 
 #Ore to a Tool
-$isTool = Read-Host "The ore to a Tool Classic? YES or NO | default:"$toolDefault
+$isTool = Read-Host "The ore to a Classic Tool? YES or NO | default:"$toolDefault
 if ($isTool -eq "") {
     $isTool = $toolDefault
 }
@@ -373,7 +373,7 @@ if ($isTool -eq "YES")
 }
 
 #Ore to a Armor
-$isArmor = Read-Host "The ore to a Armor Classic? YES or NO | default:"$armorDefault
+$isArmor = Read-Host "The ore to a Classic Armor? YES or NO | default:"$armorDefault
 if ($isArmor -eq "") {
     $isArmor = $armorDefault
 }
@@ -508,7 +508,7 @@ if ($isTool -eq "YES")
         $linkCustomItem = $pathJavaFile + "utils\CustomItemTiers.java"
         $contenuCustomItem = '
     '+ $nameM +'_TOOL(1, 420, 4.8f, 1.5f, 10, new LazyValue<>(() -> {
-    return Ingredient.of(ModItems.'+ $nameM +'.get());
+    return Ingredient.of(ModItems.'+ $defaultOreCraft.ToUpper() +'.get());
     })),'
         ADD-content -path $linkCustomItem -value $contenuCustomItem
 
@@ -533,7 +533,7 @@ if ($isArmor -eq "YES")
         $linkCustomArmor = $pathJavaFile + "utils\CustomArmorMaterials.java"
         $contenuCustomArmor = '
     '+ $nameM +'_ARMOR(TyroMod.ModId + ":'+ $nameL +'", 18, new int[]{2, 5, 7, 3}, 11, SoundEvents.ARMOR_EQUIP_IRON, 0.0f, 0.0f, () -> {
-        return Ingredient.of(ModItems.'+ $nameM +'.get());
+        return Ingredient.of(ModItems.'+ $defaultOreCraft.ToUpper() +'.get());
     }),'
         ADD-content -path $linkCustomArmor -value $contenuCustomArmor
 
@@ -551,7 +551,7 @@ echo "CRAFT ORE"
 # TOOL
 if ($isTool -eq "YES")
 {
-    $isCraftToolDef = Read-Host "Default Craft Tool? YES or NO | default: YES"
+    $isCraftToolDef = Read-Host "Tool a Default Craft? YES or NO | default: YES"
     if ($isCraftToolDef -eq "") {
         $isCraftToolDef = "YES"
     }
@@ -564,7 +564,7 @@ if ($isTool -eq "YES")
     if ($isCraftToolDef -eq "NO")
     {
 
-        echo "What Class of Tool? | default: 1"
+        echo "What is Class of Tool? | default: 1"
         echo " 1 = Mercure"
         echo " 2 = Redstone"
         echo " etc..."
@@ -594,7 +594,7 @@ if ($isTool -eq "YES")
 #ARMOR
 if ($isArmor -eq "YES"){
 
-    $isCraftArmorDef = Read-Host "Default Craft Armor? YES or NO | default: YES"
+    $isCraftArmorDef = Read-Host "Armor a Default Craft? YES or NO | default: YES"
     if ($isCraftArmorDef -eq "") {
         $isCraftArmorDef = "YES"
     }
