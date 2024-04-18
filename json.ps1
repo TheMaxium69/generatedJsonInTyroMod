@@ -13,13 +13,13 @@ if ($modid -eq "") {
 }
 
 #Recup Type
-$type = Read-Host "it's BLOCK or ITEM or TOOL | default : ITEM"
+$type = Read-Host "it's BLOCK or ITEM or TOOL or ARMOR | default : ITEM"
 if ($type -eq "") {
   $type = "ITEM"
 }
 
 #Si TYPE okay
-if (($type -eq "ITEM") -or ($type -eq "BLOCK") -or ($type -eq "TOOL")) {
+if (($type -eq "ITEM") -or ($type -eq "BLOCK") -or ($type -eq "TOOL") -or ($type -eq "armor")) {
 
   #Name du Type
   $name = Read-Host "the NAME of the" $type;
@@ -55,6 +55,40 @@ if (($type -eq "ITEM") -or ($type -eq "BLOCK") -or ($type -eq "TOOL")) {
 
     $bytes = [System.Text.Encoding]::UTF8.GetBytes($itemJSON)
     [System.IO.File]::WriteAllBytes($link, $bytes)
+
+  }
+
+  if ($type -eq "ARMOR"){
+
+    $armorsType = @("helmet", "chestplate", "leggings", "boots")
+
+    # Boucle pour afficher chaque chaîne de caractères une par une
+    foreach ($oneType in $armorsType) {
+        $link = ""
+        $tempLayer = ""
+        $itemJSON = ""
+
+         #url de création
+        $link = $path +"src\main\resources\assets\"+$modid+"\models\item\"+ $name + "_"+ $oneType +".json"
+
+        #Line "Layer0"
+        $tempLayer = $modid + ":items/" + $name + "_"+ $oneType
+
+        #JSONContenu
+        $itemJSON = @"
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "$tempLayer"
+  }
+}
+"@
+
+
+        $bytes = [System.Text.Encoding]::UTF8.GetBytes($itemJSON)
+        [System.IO.File]::WriteAllBytes($link, $bytes)
+
+    }
 
   }
 
