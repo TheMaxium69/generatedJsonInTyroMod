@@ -37,9 +37,9 @@ if (($type -eq "ITEM") -or ($type -eq "BLOCK") -or ($type -eq "TOOL")) {
 
     #Line "Parent"
     if (($type -eq "TOOL")){
-      $tempParent = "item/generated"
-    } else {
       $tempParent = "item/handheld"
+    } else {
+      $tempParent = "item/generated"
     }
 
     #JSONContenu
@@ -66,9 +66,6 @@ if (($type -eq "ITEM") -or ($type -eq "BLOCK") -or ($type -eq "TOOL")) {
     #url de création
     $link_ITEM = $path +"src\main\resources\assets\"+$modid+"\models\item\"+ $name + ".json"
 
-    #Create File
-    Out-File $link_ITEM
-
     #Line "Parent"
     $tempParent_ITEM = $modid + ":block/" + $name
 
@@ -79,41 +76,42 @@ if (($type -eq "ITEM") -or ($type -eq "BLOCK") -or ($type -eq "TOOL")) {
 }
 "@
     #Add contenue file
-    ADD-content -path $link_ITEM -value $itemJSON_ITEM
+    $bytes = [System.Text.Encoding]::UTF8.GetBytes($itemJSON_ITEM)
+    [System.IO.File]::WriteAllBytes($link_ITEM, $bytes)
+
+
+
 
                                   ### FILE BLOCKSTATES
     #url de création
     $link_BS = $path +"src\main\resources\assets\"+$modid+"\blockstates\"+ $name + ".json"
 
-    #Create File
-    Out-File $link_BS
-
     #Line "Model"
-    $tempModel_BS = $modid + ":block/" + $name
+    $tempModel_BS = $modid + ":" + $name
 
     #JSONContenu
     $itemJSON_BS = @"
 {
   "variants": {
-    "": {
-      "model": "$tempModel_BS"
-    }
+    "normal": { "model": "$tempModel_BS" }
   }
 }
 "@
     #Add contenue file
-    ADD-content -path $link_BS -value $itemJSON_BS
+    $bytes = [System.Text.Encoding]::UTF8.GetBytes($itemJSON_BS)
+    [System.IO.File]::WriteAllBytes($link_BS, $bytes)
+
+
+
+
 
 
                                   ### FILE BLOCK
     #url de création
     $link_B = $path +"src\main\resources\assets\"+$modid+"\models\block\"+ $name + ".json"
 
-    #Create File
-    Out-File $link_B
-
     #Line "All"
-    $tempAll_B = $modid + ":block/" + $name
+    $tempAll_B = $modid + ":blocks/" + $name
 
     #JSONContenu
     $itemJSON_B = @"
@@ -125,43 +123,49 @@ if (($type -eq "ITEM") -or ($type -eq "BLOCK") -or ($type -eq "TOOL")) {
 }
 "@
     #Add contenue file
-    ADD-content -path $link_B -value $itemJSON_B
+    $bytes = [System.Text.Encoding]::UTF8.GetBytes($itemJSON_B)
+    [System.IO.File]::WriteAllBytes($link_B, $bytes)
 
-                                   ### FILE LOOT
 
-    #url de création
-    $link_l = $path +"src\main\resources\data\"+$modid+"\loot_tables\block\"+ $name + ".json"
 
-    #Create File
-    Out-File $link_l
 
-    #Line "Name"
-    $tempName_l = $modid + ":" + $name
 
-    #JSONContenu
-    $itemJSON_l = @"
- {
-  "type": "minecraft:block",
-  "pools": [
-    {
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "$tempName_l"
-        }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ]
-    }
-  ]
-}
-"@
-    #Add contenue file
-    ADD-content -path $link_l -value $itemJSON_l
+
+#                                    ### FILE LOOT
+#
+#     #url de création
+#     $link_l = $path +"src\main\resources\data\"+$modid+"\loot_tables\block\"+ $name + ".json"
+#
+#     #Create File
+#     Out-File $link_l
+#
+#     #Line "Name"
+#     $tempName_l = $modid + ":" + $name
+#
+#     #JSONContenu
+#     $itemJSON_l = @"
+#  {
+#   "type": "minecraft:block",
+#   "pools": [
+#     {
+#       "rolls": 1,
+#       "entries": [
+#         {
+#           "type": "minecraft:item",
+#           "name": "$tempName_l"
+#         }
+#       ],
+#       "conditions": [
+#         {
+#           "condition": "minecraft:survives_explosion"
+#         }
+#       ]
+#     }
+#   ]
+# }
+# "@
+#     #Add contenue file
+#     ADD-content -path $link_l -value $itemJSON_l
 
   }
 
