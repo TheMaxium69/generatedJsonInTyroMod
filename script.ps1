@@ -1,12 +1,12 @@
-Import-Module -Name "E:\Minecraft\TyroMod\generatedMineraixInTyroMod\function\Add-Contenu.psm1"
-Import-Module -Name "E:\Minecraft\TyroMod\generatedMineraixInTyroMod\function\Add-Tool.psm1"
-Import-Module -Name "E:\Minecraft\TyroMod\generatedMineraixInTyroMod\function\Add-Other.psm1"
-Import-Module -Name "E:\Minecraft\TyroMod\generatedMineraixInTyroMod\function\Add-Armor.psm1"
-Import-Module -Name "E:\Minecraft\TyroMod\generatedMineraixInTyroMod\function\Add-Block.psm1"
-Import-Module -Name "E:\Minecraft\TyroMod\generatedMineraixInTyroMod\function\CreateJson-Item.psm1"
-Import-Module -Name "E:\Minecraft\TyroMod\generatedMineraixInTyroMod\function\CreateJson-Block.psm1"
-Import-Module -Name "E:\Minecraft\TyroMod\generatedMineraixInTyroMod\function\CreateJson-Lang.psm1"
-Import-Module -Name "E:\Minecraft\TyroMod\generatedMineraixInTyroMod\function\CreateJson-Craft.psm1"
+Import-Module -Name "C:\Users\mxmto\Developpement\Minecraft\Mod\Forge\TyroModS3_Forge1-12\generatedMineraixInTyroMod\function\Add-Contenu.psm1"
+Import-Module -Name "C:\Users\mxmto\Developpement\Minecraft\Mod\Forge\TyroModS3_Forge1-12\generatedMineraixInTyroMod\function\Add-Tool.psm1"
+Import-Module -Name "C:\Users\mxmto\Developpement\Minecraft\Mod\Forge\TyroModS3_Forge1-12\generatedMineraixInTyroMod\function\Add-Other.psm1"
+Import-Module -Name "C:\Users\mxmto\Developpement\Minecraft\Mod\Forge\TyroModS3_Forge1-12\generatedMineraixInTyroMod\function\Add-Armor.psm1"
+Import-Module -Name "C:\Users\mxmto\Developpement\Minecraft\Mod\Forge\TyroModS3_Forge1-12\generatedMineraixInTyroMod\function\Add-Block.psm1"
+Import-Module -Name "C:\Users\mxmto\Developpement\Minecraft\Mod\Forge\TyroModS3_Forge1-12\generatedMineraixInTyroMod\function\CreateJson-Item.psm1"
+Import-Module -Name "C:\Users\mxmto\Developpement\Minecraft\Mod\Forge\TyroModS3_Forge1-12\generatedMineraixInTyroMod\function\CreateJson-Block.psm1"
+Import-Module -Name "C:\Users\mxmto\Developpement\Minecraft\Mod\Forge\TyroModS3_Forge1-12\generatedMineraixInTyroMod\function\CreateJson-Lang.psm1"
+Import-Module -Name "C:\Users\mxmto\Developpement\Minecraft\Mod\Forge\TyroModS3_Forge1-12\generatedMineraixInTyroMod\function\CreateJson-Craft.psm1"
 
 # MAIN VARIABLE
 
