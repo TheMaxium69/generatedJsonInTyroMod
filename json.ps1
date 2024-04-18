@@ -13,7 +13,7 @@ if ($modid -eq "") {
 }
 
 #Recup Type
-$type = Read-Host "it's BLOCK or ITEM or TOOL or ARMOR | default : ITEM"
+$type = Read-Host "it's BLOCK or ITEM or TOOL or ONETOOL or ARMOR | default : ITEM"
 if ($type -eq "") {
   $type = "ITEM"
 }
