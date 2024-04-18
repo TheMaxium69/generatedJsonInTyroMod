@@ -24,7 +24,7 @@ if (($type -eq "ITEM") -or ($type -eq "BLOCK") -or ($type -eq "TOOL") -or ($type
   #Name du Type
   $name = Read-Host "the NAME of the" $type;
 
-  if (($type -eq "ITEM") -or ($type -eq "TOOL")){
+  if (($type -eq "ITEM") -or ($type -eq "ONETOOL")){
 
     #url de création
     $link = $path +"src\main\resources\assets\"+$modid+"\models\item\"+ $name + ".json"
@@ -36,7 +36,7 @@ if (($type -eq "ITEM") -or ($type -eq "BLOCK") -or ($type -eq "TOOL") -or ($type
     $tempLayer = $modid + ":items/" + $name
 
     #Line "Parent"
-    if (($type -eq "TOOL")){
+    if (($type -eq "ONETOOL")){
       $tempParent = "item/handheld"
     } else {
       $tempParent = "item/generated"
@@ -78,6 +78,40 @@ if (($type -eq "ITEM") -or ($type -eq "BLOCK") -or ($type -eq "TOOL") -or ($type
         $itemJSON = @"
 {
   "parent": "item/generated",
+  "textures": {
+    "layer0": "$tempLayer"
+  }
+}
+"@
+
+
+        $bytes = [System.Text.Encoding]::UTF8.GetBytes($itemJSON)
+        [System.IO.File]::WriteAllBytes($link, $bytes)
+
+    }
+
+  }
+
+  if ($type -eq "TOOL"){
+
+    $toolType = @("sword", "pickaxe", "axe", "shovel", "hoe")
+
+    # Boucle pour afficher chaque chaîne de caractères une par une
+    foreach ($oneType in $toolType) {
+        $link = ""
+        $tempLayer = ""
+        $itemJSON = ""
+
+         #url de création
+        $link = $path +"src\main\resources\assets\"+$modid+"\models\item\"+ $name + "_"+ $oneType +".json"
+
+        #Line "Layer0"
+        $tempLayer = $modid + ":items/" + $name + "_"+ $oneType
+
+        #JSONContenu
+        $itemJSON = @"
+{
+  "parent": "item/handheld",
   "textures": {
     "layer0": "$tempLayer"
   }
