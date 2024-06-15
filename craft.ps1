@@ -1,3 +1,4 @@
+Import-Module -Name "C:\Users\mxmto\Developpement\Minecraft\Mod\Forge\TyroModS3_Forge1-12\generatedMineraixInTyroMod\function\craft.ps1"
 echo "Start Script Create JSON"
 
 echo "--------------------------------------------------------------------------"
@@ -42,7 +43,9 @@ if ($blockoritem -eq "BLOCK")
             $nameBlock = $matches[0].Groups[1].Value
             $typeBlock = $matches[1].Groups[1].Value
 
-            echo "CRAFT A REALISER DE '$nameBlock' de type '$typeBlock'"
+            GenerateCraftBlock $nameBlock $typeBlock
+
+
         }
 
     }
@@ -67,13 +70,14 @@ if ($blockoritem -eq "ITEM")
 
             $line = $line.Substring("            new ItemGenerateClass(".Length)
             $matches = [regex]::matches($line, '"([^"]*)"')
-            $nameBlock = $matches[0].Groups[1].Value
-            $typeBlock = $matches[1].Groups[1].Value
+            $nameItem = $matches[0].Groups[1].Value
+            $typeItem = $matches[1].Groups[1].Value
 
-            echo "CRAFT A REALISER DE '$nameBlock' de type '$typeBlock'"
+            GenerateCraftItem $nameItem $typeItem
         }
 
     }
 
 
 }
+
