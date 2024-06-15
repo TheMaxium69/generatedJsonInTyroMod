@@ -1,4 +1,4 @@
-Import-Module -Name "C:\Users\mxmto\Developpement\Minecraft\Mod\Forge\TyroModS3_Forge1-12\generatedMineraixInTyroMod\function\craft.ps1"
+Import-Module -Name "C:\Users\mxmto\Developpement\Minecraft\Mod\Forge\TyroModS3_Forge1-12\generatedMineraixInTyroMod\function\craft.psm1"
 echo "Start Script Create JSON"
 
 echo "--------------------------------------------------------------------------"
@@ -43,8 +43,7 @@ if ($blockoritem -eq "BLOCK")
             $nameBlock = $matches[0].Groups[1].Value
             $typeBlock = $matches[1].Groups[1].Value
 
-            GenerateCraftBlock $nameBlock $typeBlock
-
+            GenerateCraftBlock $nameBlock $typeBlock $modid $path
 
         }
 
