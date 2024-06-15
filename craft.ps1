@@ -72,7 +72,8 @@ if ($blockoritem -eq "ITEM")
             $nameItem = $matches[0].Groups[1].Value
             $typeItem = $matches[1].Groups[1].Value
 
-            GenerateCraftItem $nameItem $typeItem
+            GenerateCraftItem $nameItem $typeItem $modid $path
+
         }
 
     }
