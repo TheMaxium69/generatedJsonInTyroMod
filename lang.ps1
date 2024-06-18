@@ -1,5 +1,5 @@
-Import-Module -Name "C:\Users\mxmto\Developpement\Minecraft\Mod\Forge\TyroModS3_Forge1-12\generatedMineraixInTyroMod\function\craft.psm1"
-echo "Start Script Create Craft JSON"
+Import-Module -Name "C:\Users\mxmto\Developpement\Minecraft\Mod\Forge\TyroModS3_Forge1-12\generatedMineraixInTyroMod\function\lang.psm1"
+echo "Start Script Create Lang File"
 
 echo "--------------------------------------------------------------------------"
 
@@ -27,7 +27,7 @@ if ($blockoritem -eq "BLOCK")
 
     $textFilePath = "C:\Users\mxmto\Developpement\Minecraft\Mod\Forge\TyroModS3_Forge1-12\src\main\java\fr\tyrolium\tyromod\init\BlocksMod.java"
     $startLigne = 29;
-    $endLigne = 301;
+    $endLigne = 359;
 
 
     $fileContent = Get-Content -Path $textFilePath
@@ -43,7 +43,7 @@ if ($blockoritem -eq "BLOCK")
             $nameBlock = $matches[0].Groups[1].Value
             $typeBlock = $matches[1].Groups[1].Value
 
-            GenerateCraftBlock $nameBlock $typeBlock $modid $path
+            GenerateLangBlock $nameBlock $typeBlock $modid $path
 
         }
 
@@ -56,7 +56,7 @@ if ($blockoritem -eq "ITEM")
 
     $textFilePath = "C:\Users\mxmto\Developpement\Minecraft\Mod\Forge\TyroModS3_Forge1-12\src\main\java\fr\tyrolium\tyromod\init\ItemsMod.java"
     $startLigne = 231;
-    $endLigne = 1377;
+    $endLigne = 1429;
 
 
     $fileContent = Get-Content -Path $textFilePath
@@ -72,7 +72,7 @@ if ($blockoritem -eq "ITEM")
             $nameItem = $matches[0].Groups[1].Value
             $typeItem = $matches[1].Groups[1].Value
 
-            GenerateCraftItem $nameItem $typeItem $modid $path
+            GenerateLangItem $nameItem $typeItem $modid $path
 
         }
 
@@ -80,4 +80,3 @@ if ($blockoritem -eq "ITEM")
 
 
 }
-
