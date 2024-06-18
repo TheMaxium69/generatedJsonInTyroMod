@@ -56,7 +56,7 @@ if ($blockoritem -eq "ITEM")
 
     $textFilePath = "C:\Users\mxmto\Developpement\Minecraft\Mod\Forge\TyroModS3_Forge1-12\src\main\java\fr\tyrolium\tyromod\init\ItemsMod.java"
     $startLigne = 231;
-    $endLigne = 1429;
+    $endLigne = 1435;
 
 
     $fileContent = Get-Content -Path $textFilePath
