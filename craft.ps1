@@ -17,7 +17,7 @@ if ($modid -eq "") {
 
 echo "--------------------------------------------------------------------------"
 
-$blockoritem = Read-Host "ITEM or BLOCK | default : BLOCK"
+$blockoritem = Read-Host "ITEM or BLOCK or OTHER | default : BLOCK"
 if ($blockoritem -eq "") {
     $blockoritem = "BLOCK"
 }
@@ -78,6 +78,52 @@ if ($blockoritem -eq "ITEM")
 
     }
 
+
+}
+
+if ($blockoritem -eq "OTHER")
+{
+    echo "Bienvenue dans le mode autre craft !"
+
+    for ($i = 0; $i -lt 20; $i++) {
+
+        $resultatId = $i + 1
+        $linkClassic = $path +"src\main\resources\assets\"+$modid+"\recipes\cobblestone\gen_cobblestone_"+ $resultatId +"_compressed.json"
+        $tempResultCraft = $modid + ":cobblestone_"+ $resultatId +"_compressed"
+
+        if ($i -eq 0) {
+            $tempBesoinCraft = "minecraft:cobblestone"
+        } else {
+            $tempBesoinCraft = $modid + ":cobblestone_"+ $i +"_compressed"
+        }
+
+        $blockJSONClassic = @"
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "###",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "$tempBesoinCraft",
+			"data": 0
+        }
+    },
+    "result": {
+        "item": "$tempResultCraft",
+		"data": 0
+    }
+}
+"@
+
+        $bytes = [System.Text.Encoding]::UTF8.GetBytes($blockJSONClassic)
+        [System.IO.File]::WriteAllBytes($linkClassic, $bytes)
+
+        echo "- Create craft cobblestone_$($resultatId)_compressed"
+
+    }
 
 }
 
